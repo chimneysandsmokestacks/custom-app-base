@@ -3,7 +3,7 @@ import { NextApiRequest, NextApiResponse } from 'next';
 import fetch from 'node-fetch';
 
 export default async function handler(req: NextApiRequest, res: NextApiResponse) {
-  console.log('API ROUTE LOG: Handler function called');  // Log when handler is called
+  console.log('API ROUTE LOG: Handler function called'); 
 
   const AIRTABLE_API_KEY = process.env.AIRTABLE_API_KEY;
   const AIRTABLE_BASE_ID = process.env.AIRTABLE_BASE_ID;
@@ -20,8 +20,8 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
     return;
   }
 
-  console.log('API ROUTE LOG: API Key:', AIRTABLE_API_KEY);  // Log the API key (for testing only, remove in production)
-  console.log('API ROUTE LOG: Base ID:', AIRTABLE_BASE_ID);  // Log the Base ID
+  console.log('API ROUTE LOG: API Key:', AIRTABLE_API_KEY);  
+  console.log('API ROUTE LOG: Base ID:', AIRTABLE_BASE_ID);  
 
   const API_URL = `https://api.airtable.com/v0/${AIRTABLE_BASE_ID}/Tasks`;
   console.log('API ROUTE LOG: API URL:', API_URL);  // Log the API URL
@@ -34,9 +34,9 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
       }
     });
 
-    console.log('API ROUTE LOG: Fetch response status:', response.status);  // Log the response status
+    console.log('API ROUTE LOG: Fetch response status:', response.status); 
     const resText = await response.text();
-    console.log('API ROUTE LOG: Fetch response text:', resText);  // Log the fetch response text
+    console.log('API ROUTE LOG: Fetch response text:', resText);  
 
     if (!response.ok) {
       console.error('API ROUTE LOG: HTTP error! Status:', response.status, 'Description:', resText);
@@ -44,7 +44,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
     }
 
     const data = JSON.parse(resText);
-    console.log('API ROUTE LOG: Fetched data:', data);  // Log the fetched data
+    console.log('API ROUTE LOG: Fetched data:', data); 
 
     const tasks = data.records.map((record: any) => ({
       id: record.id,
@@ -52,11 +52,11 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
       ...record.fields
     }));
 
-    // console.log('API ROUTE LOG: Mapped tasks:', tasks);  // Log the mapped tasks
+    // console.log('API ROUTE LOG: Mapped tasks:', tasks); 
 
     res.status(200).json({ tasks });
   } catch (error: any) {  // Catch block captures any thrown errors
-    console.error('Error fetching tasks:', error);  // Log the error
+    console.error('Error fetching tasks:', error); 
 
     // Use type guard to check if the error is an instance of Error
     if (error instanceof Error) {
