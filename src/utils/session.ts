@@ -13,7 +13,7 @@ export async function getSession(searchParams: SearchParams) {
     process.env.COPILOT_API_KEY,
     'COPILOT_API_KEY is required, guide available at: https://docs.copilot.com/docs/custom-apps-setting-up-your-first-app#step-2-register-your-app-and-get-an-api-key',
   );
-
+  
   const copilot = copilotApi({
     apiKey: apiKey,
     token:
@@ -48,3 +48,4 @@ export async function getSession(searchParams: SearchParams) {
 
   return data;
 }
+
